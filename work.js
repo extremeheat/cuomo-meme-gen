@@ -157,7 +157,7 @@ $('#bg-url').on('input', function(e) {
 $('#sel').on('change', function(e) {
     let val = $(this).val();
     console.log('val', val);
-    $('#cuomo-1').prop('src', 'cuomo-' + val);
+    $('#cuomo-1').prop('src', 'cuomo-' + val + '.png');
     // time to load
     clearTimeout(timer);
     timer = setTimeout(() => {
