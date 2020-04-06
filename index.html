@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuomo Meme Gen</title>
+    <style>
+        /* .canvas {
+            width: 1908px;
+            height: 1074px;
+        } */
+        .canvas {
+            background-color: black;
+        }
+
+        .cuomo-image {
+            display: none;
+        }
+
+        * {
+            font-size: 1vw;
+        }
+
+        .header div {
+            font-size: 2vw !important;
+            padding-bottom: 20px;
+        }
+
+        input {
+            width: 15vw;
+        }
+
+        @media only screen and (max-device-width : 600px) {
+            * {
+                font-size: 5vw;
+            }
+
+            .header div {
+                font-size: 10vw !important;
+                padding-bottom: 20px;
+            }
+
+            input {
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class='header'>
+        <div>Cuomo Meme Generator</div>
+
+        <div></div>
+        <input type="text" name="Header text" id="header-in" placeholder="Header text (Empty = no header)">
+        <input type="text" name="Body text 1" id="body1-in" placeholder="Bullet 1">
+        <input type="text" name="Body text 2" id="body2-in" placeholder="Bullet 2">
+
+        <a id="download" download="image.png"><button onclick="download()">save png</button></a>
+    </div>
+
+    <div style='padding-top: 20px;'>
+        <canvas class='canvas' id="can" height="1080" width="1920"></canvas>
+    </div>
+
+    <img class='cuomo-image' id="cuomo-1" src="cuomo-1.png" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="work.js"></script>
+</body>
+
+</html>
