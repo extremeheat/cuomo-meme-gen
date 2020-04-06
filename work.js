@@ -3,9 +3,13 @@ var ctx;
 var headerText = 'Stay at Home';
 var bodyText1 = 'Save Lives!';
 var bodyText2;
+var bodyText3;
 
 // https://stackoverflow.com/a/16599668
 function getLines(ctx, text, maxWidth) {
+    if (!text) {
+        return [];
+    }
     var words = text.split(" ");
     var lines = [];
     var currentLine = words[0];
@@ -55,34 +59,56 @@ function writeHeader(text) {
 
 function writeBodyCenter(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `38px Arial`;
+    ctx.font = `48px Arial`;
     ctx.textAlign = "center";
-    ctx.fillText(text, 1300, 570);
+    let lines = getLines(ctx, text, 1200);
+
+    console.log(lines);
+    for (var i = 0; i < lines.length; i++) {
+        // ctx.fillText(lines[i], 730, 415 + (i * 50));
+        ctx.fillText(lines[i], 1300, 570 + (i * 54));
+    }
 }
+
+var bulletStartSpacing = 215;
+var bulletSpacing = 200;
 
 function writeBodyBullet(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `38px Arial`;
+    ctx.font = `42px Arial`;
     ctx.textAlign = "left";
     // ctx.fillText(text, 730, 415);
     // ctx.fillText(text, 730, 415 + 50);
-    let lines = getLines(ctx, text, 1200);
+    let lines = getLines(ctx, text, 1100);
     console.log(lines);
     for (var i = 0; i < lines.length; i++) {
-        ctx.fillText(lines[i], 730, 415 + (i * 50));
+        ctx.fillText(lines[i], 730, (bulletStartSpacing + (bulletSpacing * 1)) + (i * 54));
     }
 }
 
 function writeBodyBullet2(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `38px Arial`;
+    ctx.font = `42px Arial`;
     ctx.textAlign = "left";
     // ctx.fillText(text, 730, 415);
     // ctx.fillText(text, 730, 415 + 50);
-    let lines = getLines(ctx, text, 1200);
+    let lines = getLines(ctx, text, 1100);
     console.log(lines);
     for (var i = 0; i < lines.length; i++) {
-        ctx.fillText(lines[i], 730, 615 + (i * 50));
+        ctx.fillText(lines[i], 730, (bulletStartSpacing + (bulletSpacing * 2)) + (i * 54));
+    }
+}
+
+function writeBodyBullet3(text) {
+    ctx.fillStyle = 'white';
+    ctx.font = `42px Arial`;
+    ctx.textAlign = "left";
+    // ctx.fillText(text, 730, 415);
+    // ctx.fillText(text, 730, 415 + 50);
+    let lines = getLines(ctx, text, 1100);
+    console.log(lines);
+    for (var i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i], 730, (bulletStartSpacing + (bulletSpacing * 3)) + (i * 54));
     }
 }
 
@@ -100,12 +126,22 @@ window.onload = function() {
 
 function draw() {
     clearBox();
-    writeHeader(headerText);
+    if (headerText) {
+        writeHeader(headerText);
+    }
     if (bodyText1 && !bodyText2) {
         writeBodyCenter(bodyText1);
     } else {
+        if (bodyText3) {
+            bulletStartSpacing = 200;
+            bulletSpacing = 180;
+            writeBodyBullet3(bodyText3);
+        } else {
+            bulletStartSpacing = 215;
+            bulletSpacing = 200;
+        }
         writeBodyBullet(bodyText1);
-        writeBodyBullet2(bodyText2);    
+        writeBodyBullet2(bodyText2);
     }
 }
 
@@ -138,6 +174,14 @@ $('#body2-in').on("input", function(e) {
     let val = $(this).val();
     clearBox();
     bodyText2 = val;
+    console.log('val', val);
+    draw()
+});
+
+$('#body3-in').on("input", function(e) {
+    let val = $(this).val();
+    clearBox();
+    bodyText3 = val;
     console.log('val', val);
     draw()
 });
