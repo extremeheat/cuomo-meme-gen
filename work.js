@@ -151,7 +151,7 @@ $('#bg-url').on('input', function(e) {
     clearTimeout(timer);
     timer = setTimeout(() => {
         draw();
-    }, 1000);
+    }, 500);
 })
 
 $('#sel').on('change', function(e) {
