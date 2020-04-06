@@ -28,14 +28,15 @@ function getLines(ctx, text, maxWidth) {
     return lines;
 }
 
+var boxImg = document.getElementById("bg-1");
+
 function clearBox() {
     let bgColor = '#085195fa';
 
     ctx.fillStyle = bgColor;
     ctx.fillRect(674, 168, 1260, 690);
     
-    var img = document.getElementById("bg-1");
-    ctx.drawImage(img, 674, 168, 1230, 690);
+    ctx.drawImage(boxImg, 674, 168, 1230, 690);
 
     ctx.globalAlpha = 0.75;
 
@@ -52,14 +53,14 @@ function writeHeader(text) {
     ctx.fillRect(700, 200, 1180, 100);
 
     ctx.fillStyle = 'white';
-    ctx.font = `62px Impact`;
+    ctx.font = `62px RedFont`;
     ctx.textAlign = "center";
     ctx.fillText(text, 1300, 270);
 }
 
 function writeBodyCenter(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `48px Arial`;
+    ctx.font = `48px RedFont`;
     ctx.textAlign = "center";
     let lines = getLines(ctx, text, 1200);
 
@@ -75,7 +76,7 @@ var bulletSpacing = 200;
 
 function writeBodyBullet(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `42px Arial`;
+    ctx.font = `42px RedFont`;
     ctx.textAlign = "left";
     // ctx.fillText(text, 730, 415);
     // ctx.fillText(text, 730, 415 + 50);
@@ -88,7 +89,7 @@ function writeBodyBullet(text) {
 
 function writeBodyBullet2(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `42px Arial`;
+    ctx.font = `42px RedFont`;
     ctx.textAlign = "left";
     // ctx.fillText(text, 730, 415);
     // ctx.fillText(text, 730, 415 + 50);
@@ -101,7 +102,7 @@ function writeBodyBullet2(text) {
 
 function writeBodyBullet3(text) {
     ctx.fillStyle = 'white';
-    ctx.font = `42px Arial`;
+    ctx.font = `42px RedFont`;
     ctx.textAlign = "left";
     // ctx.fillText(text, 730, 415);
     // ctx.fillText(text, 730, 415 + 50);
@@ -190,13 +191,25 @@ var timer = null;
 
 $('#bg-url').on('input', function(e) {
     let val = $(this).val();
-    $('#bg-1').prop('src', val);
-    // time to load
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    let url = 'https://cors-anywhere.herokuapp.com/' + val;
+    // $('#bg-1').prop('src', url);
+
+    let _img = loadImage(url, function(img) {
+        boxImg = _img;
         draw();
-    }, 500);
+    })
 })
+
+function loadImage(src, callback) {
+    var img = new Image();
+
+    img.onload = callback;
+    img.setAttribute('crossorigin', 'anonymous'); // works for me
+
+    img.src = src;
+
+    return img;
+}
 
 $('#sel').on('change', function(e) {
     let val = $(this).val();

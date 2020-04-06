@@ -10,6 +10,7 @@
             width: 1908px;
             height: 1074px;
         } */
+
         .canvas {
             background-color: black;
         }
@@ -20,6 +21,7 @@
 
         * {
             font-size: 1vw;
+            font-family: RedFont;
         }
 
         .header div {
@@ -45,6 +47,11 @@
                 width: 100vw;
             }
         }
+
+        @font-face {
+            font-family: 'RedFont';
+            src: url('redring-medium-webfont.ttf');
+        }
     </style>
 </head>
 
@@ -58,7 +65,10 @@
         <input type="text" name="Body text 2" id="body2-in" placeholder="Bullet 2">
         <input type="text" name="Body text 3" id="body3-in" placeholder="Bullet 3">
         <input type="text" name="Body text 2" id="bg-url" placeholder="Background image URL">
-        <select name="" id="sel"><option value="1">1</option><option value="2">2</option> </select>
+        <select name="" id="sel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
 
         <a id="download" download="image.png"><button onclick="download()">save png</button></a>
     </div>
@@ -72,7 +82,7 @@
     <img class='cuomo-image' id='bg-1' src="bg-drop.jpg" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="work.js?2"></script>
+    <script src="work.js?3"></script>
 </body>
 
 </html>
