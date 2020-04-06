@@ -25,9 +25,22 @@ function getLines(ctx, text, maxWidth) {
 }
 
 function clearBox() {
-    let bgColor = '#085195';
+    let bgColor = '#085195fa';
+
     ctx.fillStyle = bgColor;
+    ctx.fillRect(674, 168, 1260, 690);
+    
+    var img = document.getElementById("bg-1");
+    ctx.drawImage(img, 674, 168, 1230, 690);
+
+    ctx.globalAlpha = 0.75;
+
+    var grd = ctx.createRadialGradient(1273, 500, 40, 1273, 500, 400);
+    grd.addColorStop(0, "#0c528a");
+    grd.addColorStop(1, "#072c4a");
+    ctx.fillStyle = grd;
     ctx.fillRect(674, 168, 1230, 690);
+    ctx.globalAlpha = 1;
 }
 
 function writeHeader(text) {
@@ -128,6 +141,29 @@ $('#body2-in').on("input", function(e) {
     console.log('val', val);
     draw()
 });
+
+var timer = null;
+
+$('#bg-url').on('input', function(e) {
+    let val = $(this).val();
+    $('#bg-1').prop('src', val);
+    // time to load
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        draw();
+    }, 1000);
+})
+
+$('#sel').on('change', function(e) {
+    let val = $(this).val();
+    console.log('val', val);
+    $('#cuomo-1').prop('src', 'cuomo-' + val);
+    // time to load
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        loaded();
+    }, 500);
+})
 
 function download(){
     document.getElementById("download").download = "cuomo.png";
